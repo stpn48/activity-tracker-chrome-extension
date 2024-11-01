@@ -5,7 +5,12 @@ module.exports = {
     "./src/**/*.{js,ts,jsx,tsx}", // Adjust as needed
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        geistSans: ["GeistSans", "sans-serif"],
+        geistMono: ["GeistMono", "monospace"],
+      },
+    },
   },
   plugins: [],
 };
