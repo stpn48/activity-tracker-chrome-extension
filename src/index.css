@@ -7,3 +7,17 @@
   margin: 0;
   padding: 0;
 }
+
+@font-face {
+  font-family: "GeistMono";
+  src: url("./assets/fonts/GeistMonoVF.woff") format("woff");
+  font-weight: 400; /* Adjust weight if needed */
+  font-style: normal; /* Adjust style if needed */
+}
+
+@font-face {
+  font-family: "GeistSans";
+  src: url("./assets/fonts/GeistVF.woff") format("woff");
+  font-weight: 400; /* Adjust weight if needed */
+  font-style: normal; /* Adjust style if needed */
+}
