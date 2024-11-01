@@ -3,5 +3,5 @@ export function formatTime(seconds: number) {
   const minutes = Math.floor((seconds % 3600) / 60);
   const remainingSeconds = seconds % 60;
 
-  return `${hours ? `${hours}h` : ""} ${minutes ? `${minutes}m` : ""} ${remainingSeconds < 10 ? "0" : ""}${remainingSeconds}s`;
+  return `${hours ? `${hours}h` : ""} ${minutes ? `${minutes}m` : ""} ${remainingSeconds}s`;
 }
