@@ -25,20 +25,7 @@ export function FocusPage({}: Props) {
           onClick={() => updateFocusState({ hideYoutubeComments: !focusState.hideYoutubeComments })}
         />
       </div>
-      <div className="flex justify-between">
-        <h1>Hide Youtube Shorts </h1>
-        <Switch
-          checked={focusState.hideYoutubeShorts}
-          onClick={() => updateFocusState({ hideYoutubeShorts: !focusState.hideYoutubeShorts })}
-        />
-      </div>
-      <div className="flex justify-between">
-        <h1>Block Youtube</h1>
-        <Switch
-          checked={focusState.blockYoutube}
-          onClick={() => updateFocusState({ blockYoutube: !focusState.blockYoutube })}
-        />
-      </div>
+
       <Link className="text-xs text-stone-500" to="/">
         Go Back
       </Link>
