@@ -5,6 +5,7 @@ export type Activity = {
   title: string;
   url: string;
   faviconUrl: string;
+  timeStamps: number[];
 };
 
 export type ActivityDataMessageRequest = {
@@ -13,4 +14,6 @@ export type ActivityDataMessageRequest = {
   faviconUrl: string;
 };
 
-export type MessageRequest = any & { type: "activityData" | "incrementSessionCount" | "incrementTimeSpent" };
+export type MessageRequest = any & {
+  type: "activityData" | "incrementSessionCount" | "incrementTimeSpent";
+};
