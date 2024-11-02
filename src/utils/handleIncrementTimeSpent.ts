@@ -1,7 +1,7 @@
 import { Activity } from "../types/types";
 
 export function handleIncrementTimeSpent(request: any) {
-  const { time, title } = request;
+  const { time, title, timeStamp } = request;
 
   chrome.storage.local.get("activities", (result) => {
     const activities: Activity[] | undefined = result["activities"];
@@ -21,6 +21,7 @@ export function handleIncrementTimeSpent(request: any) {
     const updatedActivity: Activity = {
       ...activityToUpdate,
       timeSpent: activityToUpdate.timeSpent + time,
+      timeStamps: [...activityToUpdate.timeStamps, timeStamp],
     };
 
     chrome.storage.local.set({
