@@ -16,5 +16,10 @@ export default defineConfig({
       },
     },
   },
+  resolve: {
+    alias: {
+      "@": path.resolve(__dirname, "./src"), // Ensure this points to your source directory
+    },
+  },
   plugins: [react()],
 });
