@@ -1,22 +1,21 @@
-import { Link } from "react-router-dom";
 import { useActivities } from "../hooks/useActivities";
-import { formatTime } from "../utils/formatTime";
 import { ActivityCard } from "./ActivityCard";
+import { NavigationBar } from "./NavigationBar";
 
 type Props = {};
 
 export default function MainPage({}: Props) {
-  const { activities, totalTimeSpent } = useActivities();
+  const { activities } = useActivities();
 
   return (
-    <div className="flex font-geistSans flex-col gap-4 text-sm  text-white">
+    <div className="flex w-full flex-col gap-4 pb-16 font-geistSans text-sm text-white">
+      {activities.length === 0 && (
+        <p className="flex w-full justify-center text-xs text-stone-500">No activity today yet.</p>
+      )}
       {activities.map((activity) => (
         <ActivityCard activity={activity} key={activity.id} />
       ))}
-      <div className="flex flex-col w-full mt-4 items-center">
-        <p className="text-blue-600 font-geistMono">{formatTime(totalTimeSpent)}</p>
-      </div>
-      <Link to={"/focus"}>Go to focus page</Link>
+      <NavigationBar />
     </div>
   );
 }
