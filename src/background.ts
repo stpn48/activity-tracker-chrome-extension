@@ -1,40 +1,44 @@
-import { v4 as uuidv4 } from "uuid";
-import { Activity } from "./types/types";
+import { MessageRequest } from "./types/types";
+import { handleActivityDataMessage } from "./utils/handleActivityDataMessage";
+import { handleIncrementTimeSpent } from "./utils/handleIncrementTimeSpent";
+import { handleIncrementSessionCount } from "./utils/handleSessionMessage";
 
-chrome.runtime.onMessage.addListener((request) => {
-  const { timeSpent, currUrl, title, faviconUrl } = request;
+chrome.runtime.onMessage.addListener((request: MessageRequest) => {
+  switch (request.type) {
+    case "incrementTimeSpent":
+      console.log("Incrementing time spent");
+      handleIncrementTimeSpent(request);
+      break;
 
-  console.log("Received message from content script:", request);
+    case "activityData":
+      console.log("Received activity data");
+      handleActivityDataMessage(request);
+      break;
 
-  chrome.storage.local.get([title], (result) => {
-    const storedData: Activity | undefined = result[title];
-
-    const uuid = storedData ? storedData.id : uuidv4();
-    const newTimeSpent = storedData ? storedData.timeSpent + timeSpent : timeSpent;
-
-    const activity: Activity = {
-      id: uuid,
-      timeSpent: newTimeSpent,
-      title,
-      url: currUrl,
-      faviconUrl,
-    };
-
-    // Set or update the activity data in storage
-    chrome.storage.local.set({
-      [title]: activity,
-    });
-  });
+    case "incrementSessionCount":
+      console.log("Incrementing session count");
+      handleIncrementSessionCount(request);
+      break;
+  }
 });
 
-chrome.alarms.clearAll();
+function setMidnightAlarm() {
+  const now = new Date();
+  const midnight = new Date();
+  midnight.setHours(24, 0, 0, 0); // Next midnight
+
+  const timeUntilMidnight = midnight.getTime() - now.getTime();
+
+  chrome.alarms.create("clearStorageAtMidnight", {
+    when: Date.now() + timeUntilMidnight, // Set for midnight
+    periodInMinutes: 1440, // Repeat every 24 hours
+  });
+}
 
 chrome.alarms.get("clearStorageAtMidnight", (alarm) => {
   if (alarm) return;
 
-  chrome.alarms.create("clearStorageAtMidnight", {
-    periodInMinutes: 1440,
-  });
+  setMidnightAlarm();
 });
 
 chrome.alarms.onAlarm.addListener((alarm) => {
