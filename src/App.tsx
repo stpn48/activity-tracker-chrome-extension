@@ -1,11 +1,11 @@
+import { FocusPage } from "@/components/FocusPage";
+import MainPage from "@/components/MainPage";
 import { HashRouter, Route, Routes } from "react-router-dom";
-import { FocusPage } from "./components/FocusPage";
-import MainPage from "./components/MainPage";
 
 export default function App() {
   return (
     <HashRouter>
-      <div className="font-geistSans rounded-lg w-[400px] text-sm bg-[#131313] p-8 text-white">
+      <div className="w-[400px] rounded-lg bg-[#131313] p-8 font-geistSans text-sm text-white">
         <Routes>
           <Route path="/" element={<MainPage />} />
           <Route path="/focus" element={<FocusPage />} />
