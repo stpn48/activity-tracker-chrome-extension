@@ -9,6 +9,7 @@ export default function App() {
         <Routes>
           <Route path="/" element={<MainPage />} />
           <Route path="/focus" element={<FocusPage />} />
+          <Route path="/activity/[id]" element=} /> // TODO: Add activity page with graph timeStamp array should be taken care of GN BRO KEEP WORKIN !! TRUST IN JESUS
         </Routes>
       </div>
     </HashRouter>
