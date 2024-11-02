@@ -3,10 +3,8 @@
   "name": "Your Extension Name",
   "version": "1.0",
   "description": "A brief description of your extension",
-  "action": {
-    "default_popup": "index.html"
-  },
-  "permissions": ["activeTab", "storage", "alarms"],
+  "action": { "default_popup": "index.html" },
+  "permissions": ["activeTab", "storage", "alarms", "scripting", "tabs"],
   "background": {
     "service_worker": "background.js"
   },
