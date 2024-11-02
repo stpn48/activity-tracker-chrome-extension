@@ -6,13 +6,19 @@ export function useActivities() {
   const [totalTimeSpent, setTotalTimeSpent] = useState(0); // Initialize as 0
 
   const getActivities = useCallback(() => {
-    chrome.storage.local.get(null, (result) => {
-      const localStorage = result as { [title: string]: Activity };
+    chrome.storage.local.get("activities", (result) => {
+      const activities: Activity[] | undefined = result["activities"];
 
-      const activities = Object.values(localStorage).sort((a, b) => b.timeSpent - a.timeSpent); // Sort by timeSpent in descending order
-      const totalTimeSpent = Object.values(localStorage).reduce((acc, curr) => acc + curr.timeSpent, 0);
+      console.log("Activities", activities);
 
-      setActivities(activities);
+      if (!activities) {
+        setActivities([]);
+        return;
+      }
+
+      const totalTimeSpent = activities.reduce((acc, curr) => acc + curr.timeSpent, 0);
+
+      setActivities(activities.sort((a, b) => b.timeSpent - a.timeSpent));
       setTotalTimeSpent(totalTimeSpent);
     });
   }, []);
