@@ -10,14 +10,22 @@ export function ToggleButton({ onClick }: Props) {
 
   return (
     <button
-      className={twMerge("rounded-full flex items-center w-10 h-4 bg-stone-800")}
+      className={twMerge(
+        "flex h-6 w-10 items-center rounded-full bg-stone-800 transition-all duration-300",
+        isToggled ? "bg-stone-700" : "bg-stone-800",
+      )}
       onClick={() => {
         setIsToggled((prev) => !prev);
 
         if (onClick) onClick();
       }}
     >
-      <div className={twMerge("transition-all rounded-full size-5 bg-blue-600 duration-300", isToggled ? "translate-x-5" : "translate-x-0")}></div>
+      <div
+        className={twMerge(
+          "size-5 rounded-full bg-blue-600 transition-all duration-200",
+          isToggled ? "translate-x-5" : "translate-x-0",
+        )}
+      ></div>
     </button>
   );
 }
