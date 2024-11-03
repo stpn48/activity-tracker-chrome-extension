@@ -1,5 +1,4 @@
 import { getFaviconUrl } from "@/utils/getFaviconUrl";
-import { timeStamp } from "console";
 
 let intervalId: NodeJS.Timeout | null = null;
 
@@ -15,7 +14,6 @@ export function incrementTimeSpent(time: number) {
   chrome.runtime.sendMessage({
     type: "incrementTimeSpent",
     title: window.location.hostname,
-    timeStamp: Date.now(),
     time,
   });
 }
