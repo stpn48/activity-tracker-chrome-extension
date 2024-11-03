@@ -6,6 +6,7 @@ export function handleIncrementSessionCount(request: any) {
   chrome.storage.local.get("activities", (result) => {
     const activities: Activity[] | undefined = result["activities"];
 
+    console.log("storage: ");
     chrome.storage.local.get(console.log);
 
     if (!activities) {
