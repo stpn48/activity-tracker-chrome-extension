@@ -5,7 +5,7 @@ export type Activity = {
   title: string;
   url: string;
   faviconUrl: string;
-  timeStamps: number[];
+  hourlyTimeSpent: { [key: string]: number };
 };
 
 export type ActivityDataMessageRequest = {
