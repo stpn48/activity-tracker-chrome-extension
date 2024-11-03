@@ -9,8 +9,6 @@ export function useActivities() {
     chrome.storage.local.get("activities", (result) => {
       const activities: Activity[] | undefined = result["activities"];
 
-      console.log("Activities", activities);
-
       if (!activities) {
         setActivities([]);
         return;
