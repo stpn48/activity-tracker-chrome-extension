@@ -13,6 +13,7 @@ export function handleActivityDataMessage(request: ActivityDataMessageRequest) {
       timeSpent: 0,
       title,
       sessionCount: 1,
+      hourlyTimeSpent: {},
       url: currUrl,
       faviconUrl,
     };
