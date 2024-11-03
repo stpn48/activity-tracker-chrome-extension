@@ -1,13 +1,11 @@
-export function hideYtComments(state: boolean) {
-  const commentsContainer = document.querySelectorAll("ytd-comments");
+const commentStyle = document.createElement("style");
 
-  commentsContainer.forEach((container) => {
-    if (state) {
-      // Hide comments
-      (container as HTMLElement).style.display = "none";
-    } else {
-      // Show comments
-      (container as HTMLElement).style.display = "";
-    }
-  });
+export function hideYtComments(state: boolean) {
+  if (state) {
+    commentStyle.textContent = `ytd-comments { display: none !important; }`;
+    document.head.appendChild(commentStyle);
+  } else {
+    commentStyle.textContent = "";
+    document.head.removeChild(commentStyle);
+  }
 }
