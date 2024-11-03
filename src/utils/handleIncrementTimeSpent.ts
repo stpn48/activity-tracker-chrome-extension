@@ -1,7 +1,8 @@
 import { Activity } from "../types/types";
+import { convertToAMPM } from "./convertToAMPM";
 
 export function handleIncrementTimeSpent(request: any) {
-  const { time, title, timeStamp } = request;
+  const { time, title } = request;
 
   chrome.storage.local.get("activities", (result) => {
     const activities: Activity[] | undefined = result["activities"];
@@ -18,10 +19,21 @@ export function handleIncrementTimeSpent(request: any) {
       return;
     }
 
+    const hour = new Date().getHours();
+    const hourBefore = convertToAMPM(hour - 1);
+    const hourAfter = convertToAMPM(hour + 1);
+    const formattedHour = convertToAMPM(hour);
+
     const updatedActivity: Activity = {
       ...activityToUpdate,
       timeSpent: activityToUpdate.timeSpent + time,
-      timeStamps: [...activityToUpdate.timeStamps, timeStamp],
+
+      hourlyTimeSpent: {
+        ...activityToUpdate.hourlyTimeSpent,
+        [hourBefore]: activityToUpdate.hourlyTimeSpent[hourBefore] || 0,
+        [hourAfter]: activityToUpdate.hourlyTimeSpent[hourBefore] || 0,
+        [formattedHour]: (activityToUpdate.hourlyTimeSpent[formattedHour] || 0) + time,
+      },
     };
 
     chrome.storage.local.set({
