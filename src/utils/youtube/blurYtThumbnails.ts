@@ -1,11 +1,11 @@
-const style = document.createElement("style");
+const thumbnailStyle = document.createElement("style");
 // Thumbnail blurring functions
 export function blurYtThumbnails(state: boolean) {
   if (state) {
-    style.textContent = `img.yt-core-image { filter: blur(50px) !important; }`;
-    document.head.appendChild(style);
+    thumbnailStyle.textContent = `img.yt-core-image { filter: blur(50px) !important; }`;
+    document.head.appendChild(thumbnailStyle);
   } else {
-    style.textContent = "";
-    document.head.removeChild(style);
+    thumbnailStyle.textContent = "";
+    document.head.removeChild(thumbnailStyle);
   }
 }
