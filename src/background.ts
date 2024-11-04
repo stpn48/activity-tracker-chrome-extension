@@ -43,8 +43,7 @@ chrome.alarms.get("clearStorageAtMidnight", (alarm) => {
 
 chrome.alarms.onAlarm.addListener((alarm) => {
   if (alarm.name === "clearStorageAtMidnight") {
-    chrome.storage.local.clear(() => {
-      console.log("Storage cleared at midnight");
-    });
+    chrome.storage.local.remove(["activities"]);
+    console.log("Cleared activities");
   }
 });
